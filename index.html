@@ -191,10 +191,12 @@
         .sub-title { font-weight: bold; font-size: 16pt; text-decoration: underline; margin-bottom: 12px; display: block; margin-top: 0; }
         
         .single-line { white-space: nowrap; }
+        .wrap-line { white-space: normal; display: block; }
+
         #outSName, #outTName { font-weight: bold; font-size: 14pt; display: block; line-height: 1.2; margin-bottom: 2px; }
 
         .spacer { flex-grow: 1; }
-        .bottom-branding { font-size: 17pt; font-weight: bold; line-height: 1.5; padding-bottom: 8mm; text-align: center; width: 100%; }
+        .bottom-branding { font-size: 17pt; font-weight: bold; line-height: 1.2; padding-bottom: 8mm; text-align: center; width: 95%; margin: 0 auto; }
 
         .web-footer { margin: 40px 0; font-size: 14px; text-align: center; color: #555; }
         .heart { color: #e25555; animation: beat 1.5s infinite; display: inline-block; }
@@ -339,7 +341,7 @@
                 <span class="sub-title">Submitted to</span>
                 <span id="outTName"></span>
                 <span id="outTGrade"></span><br>
-                <span class="single-line">Department of <span id="outTDept"></span></span><br>
+                <span class="wrap-line">Department of <span id="outTDept"></span></span>
                 <span class="single-line">Bangladesh Agricultural University</span><br>
                 <span>Mymensingh- 2202</span>
             </div>
@@ -351,8 +353,8 @@
 
         <div class="spacer"></div>
         <div class="bottom-branding">
-            Department of <span id="outFooterDept"></span><br>
-            Bangladesh Agricultural University, Mymensingh- 2202
+            <div class="wrap-line">Department of <span id="outFooterDept"></span></div>
+            <div class="single-line">Bangladesh Agricultural University, Mymensingh- 2202</div>
         </div>
     </div>
 </div>
