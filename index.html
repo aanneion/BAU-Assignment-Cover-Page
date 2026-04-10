@@ -228,7 +228,7 @@
             <label><input type="checkbox" id="isMS" onchange="toggleForm(); syncPreview();"> <b>Check if you are an MS (Masters) student.</b></label>
         </div>
         <div class="checkbox-item">
-            <label><input type="checkbox" id="togglePreview" onchange="syncPreview()"> <b>Live preview of the PDF</b></label>
+            <label><input type="checkbox" id="togglePreview" checked onchange="syncPreview()"> <b>Live preview of the PDF</b></label>
         </div>
     </div>
 
@@ -284,7 +284,12 @@
             <input type="text" id="inTDept" placeholder="e.g. Agronomy" oninput="syncPreview()">
         </div>
         <div class="input-group" style="flex: 1;">
-            <label>Submission Date</label>
+            <label style="display: flex; justify-content: space-between; align-items: center;">
+                Submission Date
+                <span style="font-weight: normal; font-size: 12px; display: flex; align-items: center; gap: 4px;">
+                    <input type="checkbox" id="showDate" checked onchange="syncPreview()" style="width: 14px; height: 14px; margin: 0;"> Show
+                </span>
+            </label>
             <input type="date" id="inDate" oninput="syncPreview()">
         </div>
     </div>
@@ -393,6 +398,10 @@
         document.getElementById('outTDept').innerText = document.getElementById('inTDept').value || "...";
         document.getElementById('outFooterDept').innerText = document.getElementById('inTDept').value || "...";
 
+        // Date Visibility
+        const showDate = document.getElementById('showDate').checked;
+        document.getElementById('dateSection').style.display = showDate ? 'block' : 'none';
+
         const subDate = document.getElementById('inDate').value;
         document.getElementById('outDate').innerText = subDate ? new Date(subDate).toLocaleDateString('en-GB', {day: 'numeric', month: 'long', year: 'numeric'}) : "";
 
@@ -426,8 +435,12 @@
     async function generatePDF() {
         const requiredFields = [
             'inTitle', 'inCCode', 'inCTitle', 'inSem', 
-            'inSName', 'inID', 'inReg', 'inTName', 'inTDept', 'inDate'
+            'inSName', 'inID', 'inReg', 'inTName', 'inTDept'
         ];
+
+        if (document.getElementById('showDate').checked) {
+            requiredFields.push('inDate');
+        }
 
         const isMS = document.getElementById('isMS').checked;
         if (!isMS) { requiredFields.push('inLevel'); }
@@ -453,7 +466,6 @@
         const idNo = document.getElementById('inID').value;
         const element = document.getElementById('assignment-page');
         
-        // Move to body for generation to ensure correct scaling/rendering
         document.body.appendChild(element);
         element.style.display = 'block';
 
